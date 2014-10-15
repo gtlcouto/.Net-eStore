@@ -1,0 +1,12 @@
+C:\Users\GCouto\Desktop\Asp.net\Case1\eStoreCase1\eStoreDataObjects\bin\Debug\eStoreDataObjects.dll.config
+C:\Users\GCouto\Desktop\Asp.net\Case1\eStoreCase1\eStoreDataObjects\bin\Debug\eStoreDataObjects.dll
+C:\Users\GCouto\Desktop\Asp.net\Case1\eStoreCase1\eStoreDataObjects\bin\Debug\eStoreDataObjects.pdb
+C:\Users\GCouto\Desktop\Asp.net\Case1\eStoreCase1\eStoreDataObjects\obj\Debug\eStoreDataObjects.dll
+C:\Users\GCouto\Desktop\Asp.net\Case1\eStoreCase1\eStoreDataObjects\obj\Debug\eStoreDataObjects.pdb
+C:\Users\GCouto\Desktop\Asp.net\Case1\eStoreCase1\eStoreDataObjects\obj\Debug\eStoreDataObjects.csprojResolveAssemblyReference.cache
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreDataObjects\obj\Debug\eStoreDataObjects.csprojResolveAssemblyReference.cache
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreDataObjects\obj\Debug\eStoreDataObjects.dll
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreDataObjects\obj\Debug\eStoreDataObjects.pdb
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreDataObjects\bin\Debug\eStoreDataObjects.dll.config
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreDataObjects\bin\Debug\eStoreDataObjects.dll
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreDataObjects\bin\Debug\eStoreDataObjects.pdb

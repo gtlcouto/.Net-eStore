@@ -1,0 +1,93 @@
+/* http://techbrij.com/798/stylish-asp-net-wizard-control-horizontal-sidebar-on-top */
+		#wizHeader li .prevStep
+        {
+            background-color: gray;
+        }
+        #wizHeader li .prevStep:after
+        {
+            border-left-color:gray !important;
+        }
+        #wizHeader li .currentStep
+        {
+            background-color: black;
+        }
+        #wizHeader li .currentStep:after
+        {
+            border-left-color: black !important;
+        }
+        #wizHeader li .nextStep
+        {
+            background-color:#C2C2C2;
+        }
+        #wizHeader li .nextStep:after
+        {
+            border-left-color:#C2C2C2 !important;
+        }
+        #wizHeader
+        {
+            list-style: none;
+            overflow: hidden;
+            font: 18px Helvetica, Arial, Sans-Serif;
+            margin: 0px;
+            padding: 0px;
+       }
+        #wizHeader li
+        {
+            float: left;
+         }
+        #wizHeader li a
+        {
+            color: white;
+            text-decoration: none;
+            padding: 10px 0 10px 55px;
+            background: black; /* fallback color */
+            background: hsla(34,85%,35%,1);
+            position: relative;
+            display: block;
+            float: left;
+            padding-left: 52px;
+            padding-right: 52px;
+
+        }
+        #wizHeader li a:after
+        {
+            content: " ";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid hsla(34,85%,35%,1);
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            left: 100%;
+            z-index: 2;
+ 
+        }
+        #wizHeader li a:before
+        {
+            content: " ";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid white;
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            margin-left: 1px;
+            left: 100%;
+            z-index: 1;
+        }
+
+        .content
+        {
+            height:300px;
+            width:500px;
+            padding-left:50px;
+            text-align:center;
+            font:24px/1.5 Tahoma, Geneva, sans-serif;
+            border: 8px solid #fff;
+        }

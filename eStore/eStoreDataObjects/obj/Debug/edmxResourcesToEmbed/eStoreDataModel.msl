@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eStoreDBModelStoreContainer" CdmEntityContainer="eStoreDBEntities">
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="eStoreDBModel.Branch">
+        <MappingFragment StoreEntitySet="Branches">
+          <ScalarProperty Name="BranchNumber" ColumnName="BranchNumber" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="eStoreDBModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Mailcode" ColumnName="Mailcode" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Creditcardtype" ColumnName="Creditcardtype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderLineitems">
+      <EntityTypeMapping TypeName="eStoreDBModel.OrderLineitem">
+        <MappingFragment StoreEntitySet="OrderLineitems">
+          <ScalarProperty Name="LineItemID" ColumnName="LineItemID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="Prodcd" ColumnName="Prodcd" />
+          <ScalarProperty Name="QtyOrdered" ColumnName="QtyOrdered" />
+          <ScalarProperty Name="QtySold" ColumnName="QtySold" />
+          <ScalarProperty Name="QtyBackOrdered" ColumnName="QtyBackOrdered" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="eStoreDBModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+          <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="eStoreDBModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="prodcd" ColumnName="prodcd" />
+          <ScalarProperty Name="prodnam" ColumnName="prodnam" />
+          <ScalarProperty Name="graphic" ColumnName="graphic" />
+          <ScalarProperty Name="costprice" ColumnName="costprice" />
+          <ScalarProperty Name="msrp" ColumnName="msrp" />
+          <ScalarProperty Name="qoh" ColumnName="qoh" />
+          <ScalarProperty Name="qob" ColumnName="qob" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="pSingleOrderDetails" FunctionName="eStoreDBModel.Store.pSingleOrderDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eStoreDBModel.SingleOrderDetails">
+          <ScalarProperty Name="prodnam" ColumnName="prodnam" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pGetThreeClosestBranches" FunctionName="eStoreDBModel.Store.pGetThreeClosestBranches">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eStoreDBModel.GetThreeClosestBranches">
+          <ScalarProperty Name="BranchNumber" ColumnName="BranchNumber" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="DistanceFromAddress" ColumnName="DistanceFromAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pAllOrderDetails" FunctionName="eStoreDBModel.Store.pAllOrderDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eStoreDBModel.SingleOrderDetails">
+          <ScalarProperty Name="prodnam" ColumnName="prodnam" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="qtysold" ColumnName="qtysold" />
+          <ScalarProperty Name="qtyordered" ColumnName="qtyordered" />
+          <ScalarProperty Name="qtybackordered" ColumnName="qtybackordered" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pAllCustomerInfo" FunctionName="eStoreDBModel.Store.pAllCustomerInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eStoreDBModel.AllCustomerInfo">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="MailCode" ColumnName="MailCode" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

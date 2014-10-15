@@ -1,0 +1,2 @@
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreCase1Website\obj\Debug\eStoreCase2Website.csprojResolveAssemblyReference.cache
+C:\Users\GCouto\Desktop\Asp.net\Case2\eStoreCase1\eStoreCase1Website\obj\Debug\eStoreCase1Website.dll

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <style type="text/css">
+        .itemSelected
+        {
+            font-weight: bold;
+            font-size: 10px;
+            color: black;
+            font-family: verdana;
+            background-color: yellow;
+        }
+        .itemDefault
+        {
+            font-weight: normal;
+            font-size: 10px;
+            margin: 1px;
+            font-family: verdana;
+            background-color: white;
+       }
+        tr
+        {
+            font-size: 10px;
+            margin: 1px;
+            font-family: verdana;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-1.7.1.min.js" ></script>  
+     <script type="text/javascript">
+        var oldRow;
+        var sumOfTdValues = 0;
+        var cellContents;
+        var val1;
+        var val2;
+
+        $(document).ready(function() {
+
+            $("td").click(function() {                          // click on cell
+                if (oldRow != null)
+                    $(oldRow).toggleClass("itemSelected");
+                oldRow = $(this).parents("tr");                 // determine row
+                oldRow.toggleClass("itemSelected");             // turn off previous row
+
+                $('tr.itemSelected td').each(function() {       // loop through each cell in the row
+                    cellContents = $(this).html();
+                    val1 = cellContents.substring(cellContents.indexOf(".") + 1, cellContents.length); // after decimal
+                    val2 = cellContents.substring(cellContents.indexOf(".") - 1, 1);                   // before decimal
+                    sumOfTdValues = sumOfTdValues + (val1 * val2);
+                });
+                alert("You selected Row: " + val2 + " With a total value of:" + sumOfTdValues);
+                sumOfTdValues = 0;
+            });
+        });
+              
+    </script>                                                       
+    <title>JQuery 2</title>
+</head>
+<body>
+    <h3>
+        <font face="verdana">JQuery 2 - Highlight a Row and obtain Cell contents</font></h3>
+    <table id="mainTable" border="2" >
+        <tr><td>1.1</td><td>1.2</td><td>1.3</td></tr>
+        <tr><td>2.1</td><td>2.2</td><td>2.3</td></tr>
+        <tr><td>3.1</td><td>3.2</td><td>3.3</td></tr>
+        <tr><td>4.1</td><td>4.2</td><td>4.3</td></tr>
+        <tr><td>5.1</td><td>5.2</td><td>5.3</td></tr>
+    </table>
+</body>
+</html>

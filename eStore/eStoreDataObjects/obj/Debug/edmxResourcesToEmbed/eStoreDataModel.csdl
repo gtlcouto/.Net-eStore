@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eStoreDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="eStoreDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Branches" EntityType="eStoreDBModel.Branch" />
+    <EntitySet Name="Customers" EntityType="eStoreDBModel.Customer" />
+    <EntitySet Name="OrderLineitems" EntityType="eStoreDBModel.OrderLineitem" />
+    <EntitySet Name="Orders" EntityType="eStoreDBModel.Order" />
+    <EntitySet Name="Products" EntityType="eStoreDBModel.Product" />
+    <AssociationSet Name="FK_CustHasOrder" Association="eStoreDBModel.FK_CustHasOrder">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemIsProduct" Association="eStoreDBModel.FK_ItemIsProduct">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrderLineitems" EntitySet="OrderLineitems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderHasItems" Association="eStoreDBModel.FK_OrderHasItems">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderLineitems" EntitySet="OrderLineitems" />
+    </AssociationSet>
+    <FunctionImport Name="pSingleOrderDetails" ReturnType="Collection(eStoreDBModel.SingleOrderDetails)">
+      <Parameter Name="oid" Mode="In" Type="Int32" />
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="pGetThreeClosestBranches" ReturnType="Collection(eStoreDBModel.GetThreeClosestBranches)">
+      <Parameter Name="Latitude" Mode="In" Type="Double" />
+      <Parameter Name="Longitude" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="pAllOrderDetails" ReturnType="Collection(eStoreDBModel.SingleOrderDetails)">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="pAllCustomerInfo" ReturnType="Collection(eStoreDBModel.AllCustomerInfo)">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchNumber" />
+    </Key>
+    <Property Name="BranchNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Street" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="Region" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Address1" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
+    <Property Name="Mailcode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Region" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Country" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Creditcardtype" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Orders" Relationship="eStoreDBModel.FK_CustHasOrder" FromRole="Customers" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="OrderLineitem">
+    <Key>
+      <PropertyRef Name="LineItemID" />
+    </Key>
+    <Property Name="LineItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Prodcd" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="QtyOrdered" Type="Int32" Nullable="false" />
+    <Property Name="QtySold" Type="Int32" Nullable="false" />
+    <Property Name="QtyBackOrdered" Type="Int32" Nullable="false" />
+    <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Product" Relationship="eStoreDBModel.FK_ItemIsProduct" FromRole="OrderLineitems" ToRole="Products" />
+    <NavigationProperty Name="Order" Relationship="eStoreDBModel.FK_OrderHasItems" FromRole="OrderLineitems" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" />
+    <Property Name="ShipDate" Type="DateTime" Nullable="false" />
+    <Property Name="OrderAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="eStoreDBModel.FK_CustHasOrder" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="OrderLineitems" Relationship="eStoreDBModel.FK_OrderHasItems" FromRole="Orders" ToRole="OrderLineitems" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="prodcd" />
+    </Key>
+    <Property Name="prodcd" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="prodnam" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="graphic" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="costprice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="msrp" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="qoh" Type="Int32" Nullable="false" />
+    <Property Name="qob" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="OrderLineitems" Relationship="eStoreDBModel.FK_ItemIsProduct" FromRole="Products" ToRole="OrderLineitems" />
+  </EntityType>
+  <Association Name="FK_CustHasOrder">
+    <End Role="Customers" Type="eStoreDBModel.Customer" Multiplicity="1" />
+    <End Role="Orders" Type="eStoreDBModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemIsProduct">
+    <End Role="Products" Type="eStoreDBModel.Product" Multiplicity="1" />
+    <End Role="OrderLineitems" Type="eStoreDBModel.OrderLineitem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="prodcd" />
+      </Principal>
+      <Dependent Role="OrderLineitems">
+        <PropertyRef Name="Prodcd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderHasItems">
+    <End Role="Orders" Type="eStoreDBModel.Order" Multiplicity="1" />
+    <End Role="OrderLineitems" Type="eStoreDBModel.OrderLineitem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderLineitems">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SingleOrderDetails">
+    <Property Type="String" Name="prodnam" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="false" Precision="19" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <Property Type="Int32" Name="qtysold" Nullable="false" />
+    <Property Type="Int32" Name="qtyordered" Nullable="false" />
+    <Property Type="Int32" Name="qtybackordered" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetThreeClosestBranches">
+    <Property Type="Int32" Name="BranchNumber" Nullable="false" />
+    <Property Type="String" Name="Street" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Region" Nullable="true" MaxLength="2" />
+    <Property Type="Double" Name="Latitude" Nullable="true" />
+    <Property Type="Double" Name="Longitude" Nullable="true" />
+    <Property Type="Double" Name="DistanceFromAddress" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="AllCustomerInfo">
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Age" Nullable="true" />
+    <Property Type="String" Name="Address1" Nullable="true" MaxLength="120" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="120" />
+    <Property Type="String" Name="MailCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Region" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

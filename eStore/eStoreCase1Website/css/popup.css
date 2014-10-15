@@ -1,0 +1,10 @@
+
+            .popupWindow    {border: 2px solid #000; background-color:#FFFFF0;position:absolute;  width:440px;  height:200px; display:none;  z-index:9999;  padding:20px; text-align:right;}        
+            .popupStyle     {background-color: white;}
+            .itemSelected   {font-weight: bold; font-size: 10px; color: black;font-family: verdana; background-color: yellow;}
+            .defItem        {font-size: 10px; margin: 1px; font-family: verdana; background-color:White;}
+            .greenItem      {font-size: 10px; margin: 1px; font-family: verdana; background-color:Green;}
+            .tblItemHead    {font-weight: bold; font-size: 12px; font-family: verdana; background-color: silver;}
+            .tblItemBigHead {font-weight: bold; font-size: 15px; text-align:left; font-family: verdana; color: white; background-color: red;}
+            .itemData       {font-weight: bold; font-size: 10px; font-family: verdana; background-color: white;  }
+            tr              {font-size: 10px; margin: 1px; font-family: verdana; }

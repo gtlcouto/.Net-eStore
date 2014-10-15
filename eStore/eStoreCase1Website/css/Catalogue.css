@@ -1,0 +1,130 @@
+﻿    /* main section */
+#main {
+    background-color: #fff;
+    padding:20px 0;
+    width:100%;
+}
+#catalogue, #details {
+    overflow: auto;
+    float: left;
+    margin: 0 2%; 
+    width:100%; 
+    font-family: Verdana; 
+}
+#catalogue h3 {
+ 	color:#505b4d;
+	/*background gradients */
+	background:#cfcfcfb
+	background:-webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(207,207,207)), color-stop(1, rgb(255,255,255)));
+	background:-moz-linear-gradient(center bottom, rgb(207,207,207) 0%, rgb(255,255,255) 100%);
+}
+
+#catalogue h2 {
+ 	color:#505b4d;
+ 	font-family:Verdana;
+ 	font-size:x-large;
+	/*background gradients */
+	background:#cfcfcf;
+	background:-webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(207,207,207)), color-stop(1, rgb(255,255,255)));
+	background:-moz-linear-gradient(center bottom, rgb(207,207,207) 0%, rgb(255,255,255) 100%);
+	padding-bottom:10px;
+	padding-top:10px;
+	text-align:center;
+}
+#catalogue ul {
+    list-style:none outside none;
+    margin:0;
+    padding:0;
+}
+#catalogue ul li {
+    float:left;
+    padding-bottom: 10px;
+    padding-top:10px;
+    padding-left:10px;
+    padding-right:10px;
+    width: 20%;
+}
+#catalogue ul li:hover 
+{
+    background-color:#EAEAAE;
+}
+#catalogue ul li .img, #details .img {
+    text-align: center;
+}
+#catalogue ul li .img img, #details .img img {
+    height:108px;
+    width:108px;
+}
+#catalogue ul li .info, #details .info {
+    padding: 17px 20px 0 19px;
+}
+
+.stuff 
+{
+-webkit-column-count: 2;
+-webkit-column-gap: 10px; 
+-webkit-column-rule: 0px dotted black;
+-moz-column-count: 2;
+-moz-column-gap: 10px;  
+-moz-column-rule: 0px dotted black;
+column-count: 2;
+column-gap: 10px; 
+column-rule: 0px dotted black;
+}
+
+
+}
+#catalogue ul li .info .title, #details .info .title {
+    color: #000;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 150px;
+}
+#catalogue ul li .info .title:hover {
+    color: Gray;
+}
+#catalogue ul li .info p {
+    color: #7F7F7F;
+    font-size: 11px;
+    line-height: 16px;
+    padding-top: 3px;
+}
+#catalogue ul li .info .price {
+    background: none repeat scroll 0 0 #F7F7F7;
+    color: #383838;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    margin: 17px 0 10px;
+    padding: 6px 0 6px 8px;
+}
+#catalogue ul li .info .price .st, #details .info .price .st {
+    color: #7F7F7F;
+    font-size: 11px;
+    line-height: 16px;
+    margin-right: 3px;
+}
+#catalogue ul li .info .actions, #details .info .actions {
+    overflow:hidden;
+}
+#catalogue ul li .info .actions a, #details .info .actions a {
+    border: 1px solid gray;
+    color: #fd7a01;
+    display: block;
+    float:right;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 5px;
+    text-decoration: none;
+}
+#catalogue ul li .info .actions a:first-child, #details .info .actions a:first-child {
+    color: #009832;
+    float:left;
+}
+
+  

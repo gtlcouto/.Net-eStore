@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eStoreDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="eStoreDBModelStoreContainer">
+    <EntitySet Name="Branches" EntityType="eStoreDBModel.Store.Branches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customers" EntityType="eStoreDBModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderLineitems" EntityType="eStoreDBModel.Store.OrderLineitems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="eStoreDBModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="eStoreDBModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CustHasOrder" Association="eStoreDBModel.Store.FK_CustHasOrder">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemIsProduct" Association="eStoreDBModel.Store.FK_ItemIsProduct">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrderLineitems" EntitySet="OrderLineitems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderHasItems" Association="eStoreDBModel.Store.FK_OrderHasItems">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderLineitems" EntitySet="OrderLineitems" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Branches">
+    <Key>
+      <PropertyRef Name="BranchNumber" />
+    </Key>
+    <Property Name="BranchNumber" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Street" Type="varchar" MaxLength="150" />
+    <Property Name="City" Type="varchar" MaxLength="150" />
+    <Property Name="Region" Type="varchar" MaxLength="2" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="Latitude" Type="float" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="25" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Address1" Type="varchar" MaxLength="120" />
+    <Property Name="City" Type="varchar" MaxLength="120" />
+    <Property Name="Mailcode" Type="varchar" MaxLength="50" />
+    <Property Name="Region" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="Creditcardtype" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderLineitems">
+    <Key>
+      <PropertyRef Name="LineItemID" />
+    </Key>
+    <Property Name="LineItemID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="Prodcd" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="QtyOrdered" Type="int" Nullable="false" />
+    <Property Name="QtySold" Type="int" Nullable="false" />
+    <Property Name="QtyBackOrdered" Type="int" Nullable="false" />
+    <Property Name="SellingPrice" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="datetime" Nullable="false" />
+    <Property Name="ShipDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderAmount" Type="money" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="prodcd" />
+    </Key>
+    <Property Name="prodcd" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="prodnam" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="graphic" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="costprice" Type="money" Nullable="false" />
+    <Property Name="msrp" Type="money" Nullable="false" />
+    <Property Name="qoh" Type="int" Nullable="false" />
+    <Property Name="qob" Type="int" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_CustHasOrder">
+    <End Role="Customers" Type="eStoreDBModel.Store.Customers" Multiplicity="1" />
+    <End Role="Orders" Type="eStoreDBModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemIsProduct">
+    <End Role="Products" Type="eStoreDBModel.Store.Products" Multiplicity="1" />
+    <End Role="OrderLineitems" Type="eStoreDBModel.Store.OrderLineitems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="prodcd" />
+      </Principal>
+      <Dependent Role="OrderLineitems">
+        <PropertyRef Name="Prodcd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderHasItems">
+    <End Role="Orders" Type="eStoreDBModel.Store.Orders" Multiplicity="1" />
+    <End Role="OrderLineitems" Type="eStoreDBModel.Store.OrderLineitems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderLineitems">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="pAllCustomerInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="pAllOrderDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="pGetThreeClosestBranches" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Latitude" Type="float" Mode="In" />
+    <Parameter Name="Longitude" Type="float" Mode="In" />
+  </Function>
+  <Function Name="pSingleOrderDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="oid" Type="int" Mode="In" />
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+</Schema>

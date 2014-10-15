@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <style type="text/css">
+        .itemSelected
+        {
+            font-weight: bold;
+            font-size: 10px;
+            color: black;
+            font-family: verdana;
+            background-color: yellow;
+        }
+        .defItem
+        {
+            font-size: 10px;
+            margin: 1px;
+            font-family: verdana;
+        }
+        .tblItemHead
+        {
+            font-weight: bold;
+            font-size: 12px;
+            font-family: verdana;
+            background-color: silver;
+            border-style:inset;
+       }
+        .tblItemBigHead
+        {
+            font-weight: bold;
+            font-size: 15px;
+            font-family: verdana;
+            color: white;
+            background-color: blue;
+            border-style:inset;
+        }
+        .itemData
+        {
+            font-weight: bold;
+            font-size: 10px;
+            font-family: verdana;
+            background-color: white;
+            border-style:inset;
+        }
+        tr
+        {
+            font-size: 10px;
+            margin: 1px;
+            font-family: verdana;
+        }
+    </style>
+   <script type="text/javascript" src="jquery-1.7.1.min.js"></script>  
+     <script type="text/javascript">
+        var oldElem                                // global scoped variable
+        var tbl = $("<table>").css("border", "ridge 3px");
+        var noteNo = 0;
+        var oldRow;
+        var collNotes;
+        var NotesXML = "<notes>";                    // hardcoded xml data island
+        NotesXML = NotesXML + "<note><id>1</id><to>Worker</to><from>Boss</from><heading>Reminder</heading><notebody>Don't forget to work this weekend!</notebody></note>";
+        NotesXML = NotesXML + "<note><id>2</id><to>Worker</to><from>Boss</from><heading>Reminder 2</heading><notebody>Don't forget to pick up my dry cleaning!</notebody></note>";
+        NotesXML = NotesXML + "<note><id>3</id><to>Boss</to><from>Worker</from><heading>Dog</heading><notebody>I walked your dog for 15 min. this morning</notebody></note>";
+        NotesXML = NotesXML + "<note><id>4</id><to>Boss</to><from>Worker</from><heading>Car</heading><notebody>Your car is now cleaned!</notebody></note>";
+        NotesXML = NotesXML + "</notes>";
+
+
+        $(document).ready(function() {
+
+        $("td").click(function() {                          // click on cell
+ 
+            if (oldRow != null)
+                $(oldRow).toggleClass("itemSelected");
+
+            oldRow = $(this).parents("tr");                 // determine row
+            oldRow.toggleClass("itemSelected");             // turn off previous row
+            cellContents = $(this).html();
+            noteNo = parseInt(cellContents.substr(cellContents.indexOf(" ")+ 1, cellContents.length - (cellContents.indexOf(" ") + 1)));  // note number
+
+            if (jQuery.browser.msie) {   // Internet Explorer
+                xmlDocument = new ActiveXObject("Microsoft.XMLDOM");
+                xmlDocument.async = "false";
+                xmlDocument.loadXML(NotesXML);
+                collNotes = xmlDocument .selectNodes("//note");              // all note nodes IE
+
+            } else {
+                var parser = new DOMParser();
+                xmlDocument = parser.parseFromString(NotesXML, "text/xml");
+                collNotes = xmlDocument.getElementsByTagName("note");       // all note nodes FF & Chrome
+            }
+
+            tableBuilder();
+            });
+        });
+
+
+        function tableBuilder() { 
+
+            // delete rows from old table (if it exists)
+            $(tbl).find("tr").remove();
+
+            /* Row */var tr = $("<tr>");
+            var td = $("<td colspan='4'>");
+            td.text("Note # " + noteNo);
+            td.addClass("tblItemBigHead");
+            td.appendTo(tr);       // add cell to table
+            tr.appendTo(tbl);      // add row to table
+            /* Row */tr = $("<tr>");
+            td = $("<td>");
+            td.text("From");
+            td.addClass("tblItemHead");
+            td.css({ 'width': '20%', 'text-align': 'center' });
+            td.appendTo(tr);       // add cell to table
+            td = $("<td>");
+            td.text("To");
+            td.addClass("tblItemHead");
+            td.css({ 'width': '15%', 'text-align': 'center' });
+            td.appendTo(tr);       // add cell to table
+            td = $("<td>");
+            td.text("Topic");
+            td.addClass("tblItemHead");
+            td.css({ 'width': '15%', 'text-align': 'center' });
+            td.appendTo(tr);       // add cell to table
+            td = $("<td>");
+            td.text("Message");
+            td.addClass("tblItemHead");
+            td.css({ 'width': '50%', 'text-align': 'center' });
+            td.appendTo(tr);       // add cell to table
+            tr.appendTo(tbl);      // add row to table
+          
+             for (i = 0; i < collNotes.length; i++) {
+                // select correct note
+
+                tr = $("<tr>")
+                tr.addClass("itemData");
+
+                if (jQuery.browser.msie) {   // Internet Explorer
+
+                    if (noteNo == collNotes.item(i).selectSingleNode("id").text) {
+                        td = $("<td>");
+                        td.css({ 'width': '20%', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes.item(i).selectSingleNode("from").text);
+                        td.appendTo(tr);       // add cell to table
+                        td = $("<td>");
+                        td.css({ 'width': '15%', 'text-align': 'center', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes.item(i).selectSingleNode("to").text);
+                        td.appendTo(tr);       // add cell to table
+                        td = $("<td>");
+                        td.css({ 'width': '15%', 'text-align': 'center', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes.item(i).selectSingleNode("heading").text);
+                        td.appendTo(tr);       // add cell to table
+                        td = $("<td>");
+                        td.css({ 'width': '50%', 'text-align': 'center', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes.item(i).selectSingleNode("notebody").text);
+                        td.appendTo(tr);       // add cell to table
+                    }
+                } else {  // firefox and Chrome
+                    if (noteNo == collNotes[i].childNodes[0].firstChild.nodeValue) { // id
+                        td = $("<td>");
+                        td.css({ 'width': '20%', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes[i].childNodes[1].firstChild.nodeValue);
+                        td.appendTo(tr);       // add cell to table
+                        td = $("<td>");
+                        td.css({ 'width': '15%', 'text-align': 'center', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes[i].childNodes[2].firstChild.nodeValue);
+                        td.appendTo(tr);       // add cell to table
+                        td = $("<td>");
+                        td.css({ 'width': '15%', 'text-align': 'center', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes[i].childNodes[3].firstChild.nodeValue);
+                        td.appendTo(tr);       // add cell to table
+                        td = $("<td>");
+                        td.css({ 'width': '50%', 'text-align': 'center', 'border-style': 'inset', 'border-width': '2px' });
+                        td.text(collNotes[i].childNodes[4].firstChild.nodeValue);
+                        td.appendTo(tr);       // add cell to table
+                    }  // end if
+                } // end if
+                tr.appendTo(tbl);      // add row to table
+            }   // end for
+
+
+            $("body").append(tbl); // add table to body
+            
+            
+        }
+    </script>                                                       
+    <title>JQuery 4</title>
+</head>
+<body>
+    <h3><font face="verdana">JQuery 4 - Build a dynamically generated table from XML</font></h3>
+	<table id="mainTable" border="2">
+			<tr><td>Note 1</td></tr>
+			<tr><td>Note 2</td></tr>
+			<tr><td>Note 3</td></tr>
+			<tr><td>Note 4</td></tr>
+	</table>
+
+</body>
+</html>
